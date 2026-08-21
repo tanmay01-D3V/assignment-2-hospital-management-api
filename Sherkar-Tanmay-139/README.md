@@ -68,20 +68,11 @@ cd Backend
 npm install
 ```
 
-Create a `.env` file in the `Backend/` directory:
-
-```env
-port=3000
-Mongo_URI=mongodb://localhost:27017/Hospital-Managment-Sys
-```
-
 Start the server:
 
 ```bash
 npm run dev
 ```
-
-The API runs at `http://localhost:3000`.
 
 ### Frontend Setup
 
@@ -91,7 +82,6 @@ npm install
 npm run dev
 ```
 
-The app runs at `http://localhost:5173`.
 
 ## API Endpoints
 

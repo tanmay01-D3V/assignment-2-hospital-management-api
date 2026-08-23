@@ -22,17 +22,23 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "http://localhost:5173"],
+  credentials: true,
+}));
 app.use(express.json());
 app.use("/hospitals", hospitalsRouter);
 app.use("/auth", require("./Router/auth_router"));
 
-app.get("/", (req, res) => {
+const frontendBuild = path.join(__dirname, "../Frontend/dist");
+app.use(express.static(frontendBuild));
+
+app.get("/api", (req, res) => {
     res.status(200).json({message: "Hospitals CRUD API is running"});
 })
 
-app.use((req,res)=> {
-    res.status(400).json({message: "Route not Found"});
+app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendBuild, "index.html"));
 })
 
 app.use((err,req,res,next) =>{
